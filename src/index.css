@@ -41,6 +41,7 @@ code {
 .navbar ul {
   display: flex;
   gap: 20px;
+  align-items: center;
 }
 
 section {
@@ -110,4 +111,12 @@ section .message {
 
 .password_container {
   margin-bottom: 0;
+}
+
+.logout {
+  border: 0;
+  background-color: rgb(155, 7, 7);
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
 }

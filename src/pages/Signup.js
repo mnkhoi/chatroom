@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, Timestamp, doc } from "firebase/firestore";
+import { AuthContext } from "../context/auth";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -14,6 +15,8 @@ const Signup = () => {
   });
 
   const navigate = useNavigate();
+
+  const {user} = useContext(AuthContext)
 
   const { name, email, password, error, loading } = data;
 
@@ -58,7 +61,7 @@ const Signup = () => {
 
   return (
     <section>
-      <h3>Create An Account</h3>
+      {user ? <Navigate to="/"/>: <><h3>Create An Account</h3>
       <form className="form" onSubmit={signUp}>
         <div className="name_container">
           <h5>NAME</h5>
@@ -89,7 +92,8 @@ const Signup = () => {
         <Link to="/login" className="formLink">
           Log In
         </Link>
-      </p>
+      </p></>}
+      
     </section>
   );
 };
