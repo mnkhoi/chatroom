@@ -30,6 +30,9 @@ const Nav = () => {
         </li>
         {user ? (
           <>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
             <button onClick={logOut} className="logout">
               Log Out
             </button>
