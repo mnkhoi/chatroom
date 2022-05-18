@@ -1,25 +1,82 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { auth} from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+    error: null,
+    loading: false,
+  });
+
+  const navigate = useNavigate();
+
+  const { email, password, error, loading } = data;
+
+  const changeData = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const signIn = async (e) => {
+    e.preventDefault();
+    setData({ ...data, error: null, loading: true });
+    if ( !email || !password) {
+      setData({ ...data, error: "Not all areas filled out", loading: false });
+      return;
+    }
+
+    try {
+      const result = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      setData({
+        email: "",
+        password: "",
+        error: null,
+        loading: false,
+      });
+      navigate('/')
+    } catch (er) {
+      setData({ ...data, error: er.message, loading: false });
+    }
+  };
+
   return (
     <section>
-      <h3>Log Into Account</h3>
-      <form className="form">
+      <h3>Sign Into Your Account</h3>
+      <form className="form" onSubmit={signIn}>
         <div className="email_container">
           <h5>EMAIL</h5>
-          <input type="text" name="email" />
+          <input type="text" name="email" value={email} onChange={changeData} />
         </div>
         <div className="password_container">
           <h5>PASSWORD</h5>
-          <input type="password" name="password" />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={changeData}
+          />
         </div>
-
-        <input type="submit" value="Log In" />
+        {error && <p className="error">{error}</p>}
+        <input
+          type="submit"
+          value={loading ? "Loading ..." : "Log In"}
+          disabled={loading}
+        />
       </form>
-      <p>Don't have an account? <Link to="/signup" className='formLink'>Sign Up</Link></p>
+      <p className="message">
+        Don't have an account?{" "}
+        <Link to="/signup" className="formLink">
+          Sign Up
+        </Link>
+      </p>
     </section>
-  )
+  );
 }
 
 export default Login

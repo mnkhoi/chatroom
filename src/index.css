@@ -83,6 +83,7 @@ input[type="password"]:focus {
 }
 
 input[type="submit"] {
+  margin-top: 18px;
   width: 100%;
   border: 0;
   background-color: var(--color-1);
@@ -90,12 +91,23 @@ input[type="submit"] {
   border-radius: 5px;
   font-size: medium;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .formLink {
   color: var(--color-1);
 }
 
-section p {
+section .message {
   margin-bottom: 0px;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  margin: 10px 0;
+}
+
+.password_container {
+  margin-bottom: 0;
 }
