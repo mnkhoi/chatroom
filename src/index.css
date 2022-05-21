@@ -32,10 +32,12 @@ code {
 .navbar {
   justify-content: space-between;
   display: flex;
-  padding: 0px 100px;
+  padding: 0px 200px;
   align-items: center;
   height: 70px;
-  border-bottom: 2px solid var(--color-3);
+  background-color: var(--color-4);
+  /* border-bottom: 2px solid var(--color-3); */
+  box-shadow: 2px 2px 10px var(--color-3);
 }
 
 .navbar ul {
@@ -49,7 +51,7 @@ section {
   margin: 0 auto;
   margin-top: 100px;
   padding: 20px 20px;
-  box-shadow: 1px 2px 10px var(--color-2);
+  box-shadow: 0px 0px 15px var(--color-2);
   border-radius: 5px;
 }
 
@@ -119,4 +121,54 @@ section .message {
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
+}
+
+.pictureContainer {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.pictureContainer img {
+  display: inline;
+  height: 100%;
+  width: auto;
+}
+
+.overlay {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  position:absolute;
+  background-color: rgba(185, 185, 185, 0.404);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease-in-out all;
+}
+
+.pictureContainer .camera {
+  fill: black;
+  height: 2em;
+  width: 2em;
+  background-color: transparent;
+}
+
+.pictureContainer label {
+  background-color: transparent;
+  cursor: pointer;
+  position:absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay:hover {
+  opacity: 1;
 }
